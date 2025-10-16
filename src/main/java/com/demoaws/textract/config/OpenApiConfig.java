@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Configuration;
 
 //Configuration Class for Swagger UI
 @Configuration
+@SuppressWarnings("unused")
 public class OpenApiConfig {
 
     // Configuring custom open API documentation

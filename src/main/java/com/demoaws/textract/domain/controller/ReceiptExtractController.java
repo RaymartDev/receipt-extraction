@@ -22,6 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/api/v1/receipt")
 @Tag(name = "AWS Textract Controller", description = "Operation managing Textract")
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class ReceiptExtractController {
 
     private final ReceiptExtractService receiptExtractService;

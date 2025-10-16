@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class ReceiptExtractServiceImpl implements ReceiptExtractService {
 
     private final TextractClient textractClient;

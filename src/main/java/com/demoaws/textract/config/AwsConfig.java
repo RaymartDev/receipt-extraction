@@ -9,6 +9,7 @@ import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.textract.TextractClient;
 
 @Configuration
+@SuppressWarnings("unused")
 public class AwsConfig {
 
     @Value("${aws.region}")

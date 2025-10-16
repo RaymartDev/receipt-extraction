@@ -16,6 +16,7 @@ import java.util.List;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@SuppressWarnings("unused")
 public class TextractServiceImpl implements TextractService {
 
     private final TextractClient textractClient;
