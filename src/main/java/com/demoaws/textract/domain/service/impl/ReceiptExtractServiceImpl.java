@@ -15,8 +15,10 @@ import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.services.textract.TextractClient;
 import software.amazon.awssdk.services.textract.model.*;
 
+import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -77,5 +79,11 @@ public class ReceiptExtractServiceImpl implements ReceiptExtractService {
 
         receiptRepository.save(receipt);
         return dto;
+    }
+
+    @Override
+    public ReceiptDto getReceiptById(Long id) {
+        Optional<Receipt> receipt = receiptRepository.findById(id);
+        return receipt.map(ReceiptNormalizer::toDto).orElse(null);
     }
 }

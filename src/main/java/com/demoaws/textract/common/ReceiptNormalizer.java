@@ -3,11 +3,45 @@ package com.demoaws.textract.common;
 import com.demoaws.textract.domain.dto.ReceiptDto;
 import com.demoaws.textract.domain.dto.ReceiptItemDto;
 import com.demoaws.textract.domain.dto.ReceiptRawDto;
+import com.demoaws.textract.domain.entity.Receipt;
+import com.demoaws.textract.domain.entity.ReceiptItem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ReceiptNormalizer {
+
+    public static ReceiptDto toDto(Receipt receipt) {
+        if (receipt == null) return null;
+
+        ReceiptDto receiptDto = new ReceiptDto();
+        receiptDto.setCompanyName(receipt.getCompanyName());
+        receiptDto.setBranch(receipt.getBranch());
+        receiptDto.setManagerName(receipt.getManagerName());
+        receiptDto.setCashierNumber(receipt.getCashierNumber());
+        receiptDto.setSubTotal(receipt.getSubTotal());
+        receiptDto.setCash(receipt.getCash());
+        receiptDto.setChange(receipt.getChangeAmount());
+        receiptDto.setItems(toDtoItemList(receipt.getItems()));
+        return receiptDto;
+    }
+
+    private static List<ReceiptItemDto> toDtoItemList(List<ReceiptItem> receiptItems) {
+        if (receiptItems == null) return null;
+
+        return receiptItems.stream()
+                .map(ReceiptNormalizer::toDtoItem)
+                .collect(Collectors.toList());
+    }
+
+    private static ReceiptItemDto toDtoItem(ReceiptItem receiptItem) {
+        ReceiptItemDto receiptItemDto = new ReceiptItemDto();
+        receiptItemDto.setPrice(receiptItem.getPrice());
+        receiptItemDto.setQuantity(receiptItem.getQuantity());
+        receiptItemDto.setProductName(receiptItem.getProductName());
+        return receiptItemDto;
+    }
 
     public static ReceiptDto normalize(ReceiptRawDto raw) {
         List<String> lines = raw.getLines();

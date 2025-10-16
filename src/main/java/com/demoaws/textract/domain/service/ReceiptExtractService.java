@@ -5,4 +5,5 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface ReceiptExtractService {
     ReceiptDto saveReceipt(MultipartFile file);
+    ReceiptDto getReceiptById(Long id);
 }

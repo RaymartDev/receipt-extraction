@@ -2,10 +2,12 @@ package com.demoaws.textract.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class ApiResponseDto<T> {
     private int statusCode;
     private String message;
@@ -17,5 +19,13 @@ public class ApiResponseDto<T> {
 
     public static <T> ApiResponseDto<T> error(String message, HttpStatus status) {
         return new ApiResponseDto<>(status.value(), message, null);
+    }
+
+    public static <T> ApiResponseDto<T> error(String message, HttpStatus status, T data) {
+        ApiResponseDto<T> response = new ApiResponseDto<>();
+        response.setMessage(message);
+        response.setData(data);
+        response.setStatusCode(status.value());
+        return response;
     }
 }
