@@ -14,8 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.core.SdkBytes;
 import software.amazon.awssdk.services.textract.TextractClient;
 import software.amazon.awssdk.services.textract.model.*;
-
-import javax.swing.text.html.Option;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
@@ -85,5 +83,13 @@ public class ReceiptExtractServiceImpl implements ReceiptExtractService {
     public ReceiptDto getReceiptById(Long id) {
         Optional<Receipt> receipt = receiptRepository.findById(id);
         return receipt.map(ReceiptNormalizer::toDto).orElse(null);
+    }
+
+    @Override
+    public List<ReceiptDto> getAllReceipts() {
+        List<Receipt> receiptList = receiptRepository.findAll();
+        return receiptList.stream()
+                .map(ReceiptNormalizer::toDto)
+                .toList();
     }
 }
