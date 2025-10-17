@@ -27,6 +27,15 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
     }
 
+    @ExceptionHandler(RekognitionException.class)
+    public ResponseEntity<ApiResponseDto<Void>> handleRekogitionException(RekognitionException ex) {
+        ApiResponseDto<Void> response = ApiResponseDto.error(
+                ex.getMessage(),
+                HttpStatus.INTERNAL_SERVER_ERROR
+        );
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
+    }
+
     /**
      * Handle specific cases like record not found
      */
@@ -68,4 +77,6 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.badRequest().body(response);
     }
+
+
 }
